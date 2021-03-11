@@ -1,0 +1,41 @@
+const Engine = Matter.Engine;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
+const Constraint = Matter.Constraint
+var engine,world;
+var ground, hero, fly;
+
+function preload() {
+//preload the images here
+
+}
+
+function setup() {
+  createCanvas(3000,800);
+  engine = Engine.create();
+  world = engine.world;
+
+  ground = new Ground(1000,750,10000,10)
+  hero = new Hero(900,100)
+  fly = new Fly(hero.body,{x:250, y:50})
+
+
+}
+
+function draw() {
+  background(100);
+  Engine.update(engine);
+
+  ground.display();
+  hero.display();
+  fly.display();
+
+}
+
+function mouseDragged(){
+  Matter.Body.setPosition(hero.body,{x: mouseX, y: mouseY});
+  console.log("hello")
+}
+function mouseReleased(){
+  fly.fly();
+}
